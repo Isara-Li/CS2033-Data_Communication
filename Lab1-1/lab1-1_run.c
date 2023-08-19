@@ -1,7 +1,7 @@
 // general purpose standard C lib
 #include <stdio.h>
 #include <stdlib.h> // stdlib includes malloc() and free()
-#include <string.h>
+#include <string.h> // string includes strlen() and memcpy()
 
 // user-defined header files
 #include "node.h"
