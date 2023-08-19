@@ -67,48 +67,45 @@ void run(list *lst)
     }
     while (1)
     {
-        char input[1000]; // Assuming the input string won't exceed 1000 characters
-        char words[MAX_WORDS][MAX_WORD_LENGTH];
-        int wordCount = 0;
-
-        // Read input string
-        fgets(input, sizeof(input), stdin);
-        input[strlen(input) - 1] = '\0'; // Remove the newline character
-
-        // Tokenize the input string using strtok()
-        char *token = strtok(input, " ");
-        while (token != NULL && wordCount < MAX_WORDS)
+        int choice;
+        printf("Enter your choice (1: insert before, 2: insert after, 3: delete node, 4: delete list, 0: exit): ");
+        scanf("%d", &choice);
+        if (choice == 0)
         {
-            strcpy(words[wordCount], token);
-            wordCount++;
-            token = strtok(NULL, " ");
+            break;
         }
-
-        if (words[0] == '1')
+        else if (choice == INSERT_BEFORE)
         {
-            insert_node_before(lst, words[1], words[2]);
+            int index;
+            char word[MAX_WORD_LENGTH];
+            printf("Enter the index and the word to insert: ");
+            scanf("%d %s", &index, word);
+            insert_node_before(lst, index, word);
         }
-        else if (words[0] == '2')
+        else if (choice == INSERT_AFTER)
         {
-            insert_node_after(lst, words[1], words[2]);
+            int index;
+            char word[MAX_WORD_LENGTH];
+            printf("Enter the index and the word to insert: ");
+            scanf("%d %s", &index, word);
+            insert_node_after(lst, index, word);
         }
-        else if (words[0] == '3')
+        else if (choice == DELETE_NODE)
         {
-            delete_node(lst, words[1]);
+            int index;
+            printf("Enter the index of the node to delete: ");
+            scanf("%d", &index);
+            delete_node(lst, index);
         }
-        else if (words[0] == '4')
+        else if (choice == DELETE_LIST)
         {
             delete_list(lst);
         }
-        else if (words[0] == '0')
-        {
-            break;
-        }
         else
         {
-            printf("Invalid input\n");
-            break;
+            printf("Invalid choice!\n");
         }
+        print_list(lst);
     }
 }
 
