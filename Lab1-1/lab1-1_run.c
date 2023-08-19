@@ -38,7 +38,6 @@ void run(list *lst)
     int wordCount = 0;
 
     // Read input string
-    printf("Enter a comma-separated string of words: ");
     fgets(input, sizeof(input), stdin);
     input[strlen(input) - 1] = '\0'; // Remove the newline character
 
