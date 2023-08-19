@@ -53,16 +53,19 @@ void run(list *lst)
     if (wordCount >= 1)
     {
         insert_node_before(lst, 0, words[0]);
+        // print_list(lst);
     }
     if (wordCount >= 2)
     {
         insert_node_after(lst, 0, words[1]);
+        // print_list(lst);
     }
     if (wordCount >= 3)
     {
         for (int i = 2; i < wordCount; i++)
         {
             insert_node_after(lst, -1, words[i]);
+            // print_list(lst);
         }
     }
     while (1)
@@ -75,17 +78,21 @@ void run(list *lst)
         }
         else if (choice == INSERT_BEFORE)
         {
+            // print_list(lst);
             int index;
-            char word[MAX_WORD_LENGTH];
-            scanf("%d %s", &index, word);
-            insert_node_before(lst, index, word);
+            char word_0[MAX_WORD_LENGTH];
+            scanf("%d %s", &index, word_0);
+            insert_node_before(lst, index, word_0);
+            // print_list(lst);
         }
         else if (choice == INSERT_AFTER)
         {
+            // print_list(lst);
             int index;
-            char word[MAX_WORD_LENGTH];
-            scanf("%d %s", &index, word);
-            insert_node_after(lst, index, word);
+            char word_1[MAX_WORD_LENGTH];
+            scanf("%d %s", &index, word_1);
+            insert_node_after(lst, index, word_1);
+            // print_list(lst);
         }
         else if (choice == DELETE_NODE)
         {
