@@ -68,7 +68,6 @@ void run(list *lst)
     while (1)
     {
         int choice;
-        printf("Enter your choice (1: insert before, 2: insert after, 3: delete node, 4: delete list, 0: exit): ");
         scanf("%d", &choice);
         if (choice == 0)
         {
@@ -78,7 +77,6 @@ void run(list *lst)
         {
             int index;
             char word[MAX_WORD_LENGTH];
-            printf("Enter the index and the word to insert: ");
             scanf("%d %s", &index, word);
             insert_node_before(lst, index, word);
         }
@@ -86,14 +84,12 @@ void run(list *lst)
         {
             int index;
             char word[MAX_WORD_LENGTH];
-            printf("Enter the index and the word to insert: ");
             scanf("%d %s", &index, word);
             insert_node_after(lst, index, word);
         }
         else if (choice == DELETE_NODE)
         {
             int index;
-            printf("Enter the index of the node to delete: ");
             scanf("%d", &index);
             delete_node(lst, index);
         }
@@ -105,7 +101,6 @@ void run(list *lst)
         {
             printf("Invalid choice!\n");
         }
-        print_list(lst);
     }
 }
 
