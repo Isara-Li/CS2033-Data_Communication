@@ -25,31 +25,55 @@ void run(chain *chn)
 {
     int row_num;
     scanf("%d", &row_num);
-    char str[15];
-    scanf("%s", str);
-
-    int len = strlen(str);
-    char *numBuffer = (char *)malloc(len * sizeof(char));
-
-    for (int i = 0; i < len; i++)
+    int col_num = 4;
+    matrix *mat = create_matrix(row_num, col_num);
+    for (int i = 0; i < row_num; ++i)
     {
-        if (str[i] != ' ')
+        for (int j = 0; j < col_num; ++j)
         {
-            numBuffer[strlen(numBuffer)] = str[i];
-        }
-        if (str[i] == ' ' || i == len - 1)
-        {
-            if (strlen(numBuffer) > 0)
-            {
-                int num = atoi(numBuffer);
-                printf("%d ", num);
-                memset(numBuffer, 0, sizeof(numBuffer));
-            }
+            scanf("%d", mat->data[i][j]);
         }
     }
-
-    // Free the memory allocated for the buffer
-    free(numBuffer);
+    insert_node_before(chn, 0, mat);
+    matrix *mat_1 = create_matrix(mat->num_rows, mat->num_cols);
+    // copy the mat in to mat_1'
+    memccpy(mat_1, mat, sizeof(mat), sizeof(mat_1));
+    while (1)
+    {
+        int index;
+        scanf("%d", &index);
+        if (index == 0)
+        {
+            break;
+        }
+        if (index == 2)
+        {
+            int *new_row = (int *)malloc(col_num * sizeof(int));
+            for (int i = 0; i < 4; ++i)
+            {
+                scanf("%d", &new_row[i]);
+            }
+            add_row(mat_1, new_row);
+            insert_node_after(chn, 0, mat_1);
+        }
+        else if (index == 1)
+        {
+            int *new_col = (int *)malloc(4 * sizeof(int));
+            for (int i = 0; i < 4; ++i)
+            {
+                scanf("%d", &new_col[i]);
+            }
+            add_col(mat_1, new_col);
+            insert_node_after(chn, 0, mat_1);
+        }
+        else if (index == 3)
+        {
+            int row_index;
+            scanf("%d", &row_index);
+            delete_row(mat_1, row_index);
+            insert_node_after(chn, 0, mat_1);
+        }
+    }
 }
 void print_chain(chain *chn)
 {
