@@ -1,7 +1,6 @@
 // general purpose standard C lib
 #include <stdio.h>
 #include <stdlib.h> // stdlib includes malloc() and free()
-#include <string.h> // string includes strlen() and memcpy()
 
 // user-defined header files
 #include "chain.h"
@@ -25,21 +24,77 @@ void run(chain *chn)
 {
     int row_num;
     scanf("%d", &row_num);
-    // printf("%d\n", row_num);
-    int col_num = 4;
+    getchar();
+    // --------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------
+
+    char input[10]; // Assuming the input string won't exceed 100 characters
+    printf("Enter a string of space-separated integers: ");
+    scanf("%[^\n]%*c", input);
+
+    int len = 0;
+    while (input[len] != '\0')
+    {
+        len++;
+    }
+
+    if (input[len - 1] == '\n')
+    {
+        input[len - 1] = '\0'; // Remove the newline character
+        len--;
+    }
+
+    int spaceCount = 0;
+    for (int i = 0; i < len; ++i)
+    {
+        if (input[i] == ' ')
+        {
+            spaceCount++;
+        }
+    }
+    printf("Number of spaces: %d\n", spaceCount);
+
+    int numCount = spaceCount + 1;
+    int *numbers = (int *)malloc(numCount * sizeof(int));
+
+    int numStart = 0;
+    for (int i = 0; i <= len; ++i)
+    {
+        if (input[i] == ' ' || input[i] == '\0')
+        {
+            input[i] = '\0';
+            numbers[numStart] = atoi(input + numStart);
+            numStart = i + 1;
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------
+
+    int col_num = spaceCount + 1;
     matrix *last_matrix = create_matrix(row_num, col_num);
-    for (int i = 0; i < row_num; ++i)
+    
+    for (int j = 0; j < col_num; ++j)
+    {
+        last_matrix->data[0][j] = numbers[j];
+    }
+    printf("First row added \n");
+    for (int i = 1; i < row_num; ++i)
     {
         for (int j = 0; j < col_num; ++j)
         {
             scanf("%d", &last_matrix->data[i][j]);
         }
+        printf("Row added \n");
     }
 
     insert_node_before(chn, 0, last_matrix);
 
     while (1)
     {
+        printf("Entered the loop \n ");
         int func_code;
         scanf("%d", &func_code);
         if (func_code == 0)

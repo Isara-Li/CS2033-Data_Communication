@@ -245,6 +245,7 @@ int get_lenght(chain *lst)
 // implementation
 void insert_node_before(chain *lst, int index, matrix *mat)
 {
+
     node *new_node = create_node(mat);
     // If the list is empty, the new node becomes the head
     if (lst->head == NULL)
