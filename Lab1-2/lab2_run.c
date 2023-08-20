@@ -25,54 +25,71 @@ void run(chain *chn)
 {
     int row_num;
     scanf("%d", &row_num);
+    // printf("%d\n", row_num);
     int col_num = 4;
-    matrix *mat = create_matrix(row_num, col_num);
+    matrix *last_matrix = create_matrix(row_num, col_num);
     for (int i = 0; i < row_num; ++i)
     {
         for (int j = 0; j < col_num; ++j)
         {
-            scanf("%d", mat->data[i][j]);
+            scanf("%d", &last_matrix->data[i][j]);
         }
     }
-    insert_node_before(chn, 0, mat);
-    matrix *mat_1 = create_matrix(mat->num_rows, mat->num_cols);
-    // copy the mat in to mat_1'
-    memccpy(mat_1, mat, sizeof(mat), sizeof(mat_1));
+
+    insert_node_before(chn, 0, last_matrix);
+
     while (1)
     {
-        int index;
-        scanf("%d", &index);
-        if (index == 0)
+        int func_code;
+        scanf("%d", &func_code);
+        if (func_code == 0)
         {
             break;
         }
-        if (index == 2)
+        matrix *new_mat = create_matrix(last_matrix->num_rows, last_matrix->num_cols);
+        memccpy(new_mat, last_matrix, sizeof(last_matrix), sizeof(new_mat));
+
+        for (int i = 0; i < last_matrix->num_rows; ++i)
         {
-            int *new_row = (int *)malloc(col_num * sizeof(int));
+            for (int j = 0; j < last_matrix->num_cols; ++j)
+            {
+                new_mat->data[i][j] = last_matrix->data[i][j];
+            }
+        }
+
+        if (func_code == 2)
+        {
+            int *new_row = (int *)malloc(4 * sizeof(int));
             for (int i = 0; i < 4; ++i)
             {
                 scanf("%d", &new_row[i]);
             }
-            add_row(mat_1, new_row);
-            insert_node_after(chn, 0, mat_1);
+            add_row(new_mat, new_row);
         }
-        else if (index == 1)
+        else if (func_code == 3)
         {
-            int *new_col = (int *)malloc(4 * sizeof(int));
-            for (int i = 0; i < 4; ++i)
+            int *new_col = (int *)malloc(new_mat->num_rows * sizeof(int));
+            for (int i = 0; i < new_mat->num_rows; ++i)
             {
                 scanf("%d", &new_col[i]);
             }
-            add_col(mat_1, new_col);
-            insert_node_after(chn, 0, mat_1);
+            add_col(new_mat, new_col);
         }
-        else if (index == 3)
+        else if (func_code == 4)
         {
-            int row_index;
-            scanf("%d", &row_index);
-            delete_row(mat_1, row_index);
-            insert_node_after(chn, 0, mat_1);
+            int value;
+            scanf("%d", &value);
+            increment(new_mat, value);
         }
+        else if (func_code == 7)
+        {
+            int power;
+            scanf("%d", &power);
+            scalar_power(new_mat, power);
+        }
+
+        insert_node_after(chn, -1, new_mat);
+        last_matrix = new_mat;
     }
 }
 void print_chain(chain *chn)
