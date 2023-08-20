@@ -13,7 +13,7 @@ node *create_node(char *word)
 	node *new_node = (node *)malloc(sizeof(node));
 	new_node->prev = NULL;
 	new_node->next = NULL;
-	new_node->word = strdup(word);
+	strcpy(new_node->word, word);
 	return new_node;
 }
 
