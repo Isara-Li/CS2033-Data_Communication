@@ -47,7 +47,7 @@ void run(chain *chn)
             break;
         }
         matrix *new_mat = create_matrix(last_matrix->num_rows, last_matrix->num_cols);
-        memccpy(new_mat, last_matrix, sizeof(last_matrix), sizeof(new_mat));
+        // Copy the last matrix into new matrix
 
         for (int i = 0; i < last_matrix->num_rows; ++i)
         {
