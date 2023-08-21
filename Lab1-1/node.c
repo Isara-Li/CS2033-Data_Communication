@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h> // includes malloc(),free()
 #include <string.h> // includes strlen(), memcpy()
-#include <ctype.h>	// includes toupper(), tolower()
+#include <ctype.h>	// includes toupper()
 
 // user-defined header files
 #include "node.h" // do not modify this file
